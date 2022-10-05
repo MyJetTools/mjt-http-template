@@ -1,0 +1,42 @@
+[hooks]
+pre = ["per-script.rhai"]
+post = ["post-script.rhai"]
+
+[placeholders.http_port]
+type = "string"
+prompt = "Http port?"
+default = "8000"
+
+[placeholders.is_seq_enabled]
+type = "bool"
+prompt = "Want to use seq logger?"
+default = true
+
+[placeholders.is_use_grpc_client]
+type = "bool"
+prompt = "Want to grpc client?"
+default = true
+
+[placeholders.is_use_psql]
+type = "bool"
+prompt = "Will you use PostgreSQL?"
+default = false
+
+[placeholders.is_use_telemetry]
+type = "bool"
+prompt = "Will you use MyTelemetry?"
+default = false
+
+[placeholders.is_use_nosql]
+type = "string"
+prompt = "Will you use MyNoSql and how?"
+choices = ["reader", "writer", "both", "no"]
+default = "no"
+
+[template]
+ignore = [ 
+  "./templates",
+  "./.git",
+  "./internal",
+  "./readme.MD",
+]

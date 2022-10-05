@@ -1,0 +1,15 @@
+
+syntax = "proto3";
+package testgrpc;
+
+message TestRequest {
+    string Test = 1;
+}
+
+message TestResponse {
+    string Test = 1;
+}
+
+service TestService {
+    rpc Test(testgrpc.TestRequest) returns (testgrpc.TestResponse);
+}
