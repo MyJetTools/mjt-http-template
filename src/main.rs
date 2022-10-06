@@ -1,6 +1,7 @@
 use std::sync::Arc;
 
-use {{project-name | snake_case}}::{SettingsReader, APP_NAME, APP_VERSION, AppContext, setup_server};
+use {{project-name | snake_case}}::{SettingsReader, APP_NAME, APP_VERSION, AppContext, setup_server, 
+    {% if is_use_sb == "subscriber" or is_use_sb == "both" %}bind_sb_subscribers, {% endif %}};
 
 {% if is_seq_enabled %}use my_seq_logger::SeqLogger;{% endif %}
 
@@ -23,6 +24,9 @@ async fn main() {
         APP_NAME.to_string(),
         settings_reader.clone(),
     );
+
+    {% if is_use_sb == "subscriber" or is_use_sb == "both" %}bind_sb_subscribers(app.clone()).await;{% endif %}
+
     telemetry_writer.start(app.app_states.clone(), my_logger::LOGGER.clone());{% endif %}
     
     setup_server(app.clone(), {{http_port}});

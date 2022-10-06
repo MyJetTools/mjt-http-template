@@ -2,7 +2,7 @@ use std::{time::Duration};
 
 {% if is_use_telemetry%}use my_grpc_extensions::GrpcClientInterceptor;{% endif %}
 {% if is_seq_enabled %}use my_telemetry::MyTelemetryContext;{% endif %}
-use tonic::{{% if is_use_telemetry%}codegen::InterceptedService,{% endif %} transport::Channel};
+use tonic::{ {% if is_use_telemetry%}codegen::InterceptedService,{% endif %} transport::Channel};
 
 use crate::testgrpc_grpc::{test_service_client::TestServiceClient, TestResponse, TestRequest};
 

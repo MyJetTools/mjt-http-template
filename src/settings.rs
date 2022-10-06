@@ -18,6 +18,8 @@ pub struct SettingsModel {
     pub my_no_sql_data_reader: String,{% endif %}
     {% if is_use_grpc_client %}#[serde(rename = "GrpcServiceUrl")]
     pub grpc_service_url: String,{% endif %}
+    {% if is_use_sb != "no" %}#[serde(rename = "MySbConnection")]
+    pub my_service_bus_connection: String,{% endif %}
 }
 
 {% if is_seq_enabled %}#[async_trait::async_trait]
@@ -44,3 +46,22 @@ impl my_telemetry_writer::MyTelemetrySettings for SettingsReader {
     }
 }{% endif %}
 
+{% if is_use_nosql != "no" %}
+#[async_trait::async_trait]
+impl my_no_sql_tcp_reader::MyNoSqlTcpConnectionSettings for SettingsReader {
+    async fn get_host_port(&self) -> String {
+        let read_access = self.settings.read().await;
+        read_access.my_no_sql_data_reader.clone()
+    }
+}
+{% endif %}
+
+{% if is_use_sb != "no" %}
+#[async_trait::async_trait]
+impl my_service_bus_tcp_client::MyServiceBusSettings for SettingsReader {
+    async fn get_host_port(&self) -> String {
+        let read_access = self.settings.read().await;
+        read_access.my_service_bus_connection.clone()
+    }
+}
+{% endif %}

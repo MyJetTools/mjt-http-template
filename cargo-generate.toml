@@ -33,6 +33,12 @@ prompt = "Will you use MyNoSql and how?"
 choices = ["reader", "writer", "both", "no"]
 default = "no"
 
+[placeholders.is_use_sb]
+type = "string"
+prompt = "Will you use Service Bus and how?"
+choices = ["publisher", "subscriber", "both", "no"]
+default = "no"
+
 [template]
 ignore = [ 
   "./templates",

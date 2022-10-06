@@ -31,6 +31,12 @@ my-postgres = { tag = "0.2.3", git = "https://github.com/MyJetTools/my-postgres.
 ] }
 tokio-postgres = { version = "*", features = ["with-chrono-0_4"] }
 {% endif %}
+
+{% if is_use_sb != "no" %}
+my-service-bus-tcp-client = { tag = "0.1.7", git = "https://github.com/MyJetTools/my-service-bus-tcp-client.git" }
+my-service-bus-shared = { tag = "0.2.4", git = "https://github.com/MyJetTools/my-service-bus-shared.git" }
+{% endif %}
+
 my-settings-reader = { tag = "0.1.5", git = "https://github.com/MyJetTools/my-settings-reader.git", features = [
     "background-reader",
 ] }
